@@ -57,6 +57,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 func updateDNS(host, ip, username, password string) error {
 	var req http.Request
 	req.URL, _ = url.Parse(fmt.Sprintf("http://dynupdate.no-ip.com/nic/update?hostname=%s&myip=%s", host, password))
+	req.Header = make(http.Header)
 	req.SetBasicAuth(username, password)
 
 	resp, err := http.DefaultClient.Do(&req)
