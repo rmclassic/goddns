@@ -58,6 +58,7 @@ func updateDNS(host, ip, username, password string) error {
 	var req http.Request
 	req.URL, _ = url.Parse(fmt.Sprintf("http://dynupdate.no-ip.com/nic/update?hostname=%s&myip=%s", host, ip))
 	req.Header = make(http.Header)
+	req.Header.Add("User-Agent", "rmclassic goddns/ubuntu-22.04 raminterex@yahoo.com")
 	req.SetBasicAuth(username, password)
 
 	resp, err := http.DefaultClient.Do(&req)
